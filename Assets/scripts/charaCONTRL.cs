@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.Rendering.DebugUI;
 
-public class charaCONTRL : MonoBehaviour
+public class CharaCONTRL : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     public Text staminaText;

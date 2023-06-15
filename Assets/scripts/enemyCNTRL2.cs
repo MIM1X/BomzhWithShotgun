@@ -1,27 +1,20 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyCNTRL : MonoBehaviour
+public class EnemyCNTRL2 : MonoBehaviour
 {
-    public float coolDownTime = 2;
-    private float nextTime = 0;
-    public float walkSpeed = 1f;
-    public bool flipRight = false;
-    private bool stayOrWalk;
-    private int countBullets = 50;
-
     private Transform player;
     public Transform Gun;
-    public Transform shotpos;
-    public GameObject Bullet;
+
+    public float walkSpeed = 0.05f;
+    private bool stayOrWalk;
+    public bool flipRight = false;
 
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
-
     void FixedUpdate()
     {
         //Ходьба
@@ -45,37 +38,13 @@ public class EnemyCNTRL : MonoBehaviour
         Vector3 difference = player.transform.position - transform.position;
         difference.Normalize();
         float rotation_z = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
-        Gun.transform.rotation = Quaternion.Euler(0f, 0f, rotation_z);
-        //
-        //Кол-во выстрелов и потом кулдаун
-        if (Time.time > nextTime)
-        {
-            if (countBullets > 0)
-            {
-                    Instantiate(Bullet, shotpos.transform.position, Gun.transform.rotation);
-                    countBullets--;
-            }
-            else 
-            {
-                nextTime = Time.time + coolDownTime;
-                countBullets += 50;
-            } 
-        }
+        Gun.transform.rotation = Quaternion.Euler(0f, 0f, (float)(rotation_z));
         //
     }
-
     private void Flip()
     {
         flipRight = !flipRight;
         transform.Rotate(0f, 180f, 0f);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.name == "Player") stayOrWalk = true;
-    }
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.name == "Player") stayOrWalk = false;
-    }
 }
