@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 public class CharaCONTRL : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     public Text staminaText;
+    public Camera cam;
 
     private bool godMod = false;
     public float timeGodMod;
@@ -108,6 +104,30 @@ public class CharaCONTRL : MonoBehaviour
             godMod = true;
             this.GetComponent<SpriteRenderer>().color = new Color(0, 1, 0);
             nextTimee = Time.time + timeGodMod;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.name == "Dleft")
+        {
+            transform.position -= new Vector3(3f, 0, 0);
+            cam.transform.position -= new Vector3(18f, 0, 0);
+        }
+        else if (collision.name == "Dright")
+        {
+            transform.position += new Vector3(3f, 0, 0);
+            cam.transform.position += new Vector3(18f, 0, 0);
+        }
+        else if (collision.name == "Dup")
+        {
+            transform.position += new Vector3(0, 4.4f, 0);
+            cam.transform.position += new Vector3(0, 10, 0);
+        }
+        else if (collision.name == "Ddown")
+        {
+            transform.position -= new Vector3(0, 4.4f, 0);
+            cam.transform.position -= new Vector3(0, 10, 0);
         }
     }
 }
