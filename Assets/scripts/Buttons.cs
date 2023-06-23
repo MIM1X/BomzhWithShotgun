@@ -11,11 +11,11 @@ public class Buttons : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    public void LoadSecondSceneButtonClick()
+    public void LoadRECORDSceneButtonClick()
     {
         SceneManager.LoadScene(2);
     }
-    public void ExitButtonClick()
+        public void ExitButtonClick()
     {
         Application.Quit();
     }
